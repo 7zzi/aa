@@ -11,27 +11,26 @@ sf::Vector2f Factors(2.0f, 2.0f);
 float x = 320.0f;
 float y = 40.0f;
 
-sf::FloatRect GetPlayerBounds() {
+sf::FloatRect Player::GetBounds() {
 	sf::FloatRect localBounds = player.getGlobalBounds();
 	return localBounds;
 }
 
-void Move(float xf, float yf) {
-	x += xf;
-	y += yf;
+void Player::Move(float xf, float yf) {
+	Player::x += xf;
+	Player::y += yf;
 
 	sf::Vector2f Position(x, y);
 
 	player.setPosition(Position);
 }
 
-void RenderPlayer(sf::RenderWindow& w) { 
-	sf::FloatRect PlayerBounds = GetPlayerBounds();
-	sf::FloatRect GroundBounds = GetGroundBounds();
+void Player::Jump() {
+	/*sf::Rect<float> PlayerBounds = Player::GetBounds();
+	sf::Rect<float> GroundBounds = Ground::GetBounds();*/
+}
 
-	if (PlayerBounds.findIntersection(GroundBounds)) {
-		std::cout << "HIT!" << std::endl;
-	}
+void RenderPlayer(sf::RenderWindow& w) { 
 
 	player.setScale(Factors);
 	w.draw(player); 

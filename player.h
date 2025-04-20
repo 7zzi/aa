@@ -7,10 +7,17 @@
 #include <iostream>
 
 //sf::Sprite LOAD();
-sf::FloatRect GetPlayerBounds();
-void Kill(int REASON);
-void Move(float xf, float yf);
-void Jump();
-void RenderPlayer(sf::RenderWindow& w);
+class Player {
+	private:
+		sf::Sprite player;
+		void Kill(int REASON);
+		float x;
+		float y;
+	public:
+		sf::FloatRect GetBounds();
+		void Move();
+		void Jump();
+		void Render();
+};
 
 #endif

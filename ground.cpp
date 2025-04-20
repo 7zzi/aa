@@ -9,14 +9,14 @@ sf::Sprite ground(texture);
 sf::Vector2f ScaleFactors(1.0f, 1.0f);
 std::vector<sf::Vector2f> positions;
 
-sf::FloatRect GetGroundBounds() {
+sf::FloatRect Ground::GetBounds() {
 	sf::FloatRect localBounds = ground.getGlobalBounds();
 	return localBounds;
 }
 
 void Jump() {}
 
-void RenderGround(sf::RenderWindow& w) {
+void Ground::Render(sf::RenderWindow& w) {
 	ground.setScale(ScaleFactors);
 	positions.push_back({0, 400 });
 

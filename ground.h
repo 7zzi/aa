@@ -6,7 +6,10 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-sf::FloatRect GetGroundBounds();
-void RenderGround(sf::RenderWindow& w);
+class Ground {
+	public:
+		sf::FloatRect GetBounds();
+		void Render(sf::RenderWindow& w);
+};
 
 #endif

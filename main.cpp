@@ -7,7 +7,6 @@ int main()
     sf::CircleShape shape(100.f);
     shape.setFillColor(sf::Color::Green);
 
-
     while (window.isOpen())
     {
         while (const std::optional event = window.pollEvent())
@@ -17,18 +16,18 @@ int main()
         }
         
         if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::W)) {
-            Move(0.0f, -5.0f);
+            Player::Move(0.0f, -5.0f);
         } if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::S)) {
-            Move(0.0f, 5.0f);
+            Player::Move(0.0f, 5.0f);
         } if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A)) {
-            Move(-5.0f, 0.0f);
+            Player::Move(-5.0f, 0.0f);
         } if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D)) {
-            Move(5.0f, 0.0f);
+            Player::Move(5.0f, 0.0f);
         }
 
         window.clear();
-        RenderPlayer(window);
-        RenderGround(window);
+        Player::Render(window);
+        Ground::Render(window);
         window.display();
     }
 }
