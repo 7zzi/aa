@@ -1,0 +1,38 @@
+#include "player.h"
+#include "ground.h"
+
+#include <SFML/Graphics.hpp>
+#include <iostream>
+#include <unordered_map>
+
+const sf::Texture texture("Player.png");
+sf::Sprite player(texture);
+sf::Vector2f Factors(2.0f, 2.0f);
+float x = 320.0f;
+float y = 40.0f;
+
+sf::FloatRect GetPlayerBounds() {
+	sf::FloatRect localBounds = player.getGlobalBounds();
+	return localBounds;
+}
+
+void Move(float xf, float yf) {
+	x += xf;
+	y += yf;
+
+	sf::Vector2f Position(x, y);
+
+	player.setPosition(Position);
+}
+
+void RenderPlayer(sf::RenderWindow& w) { 
+	sf::FloatRect PlayerBounds = GetPlayerBounds();
+	sf::FloatRect GroundBounds = GetGroundBounds();
+
+	if (PlayerBounds.findIntersection(GroundBounds)) {
+		std::cout << "HIT!" << std::endl;
+	}
+
+	player.setScale(Factors);
+	w.draw(player); 
+}
