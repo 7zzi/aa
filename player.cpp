@@ -25,13 +25,19 @@ void Player::Move(float xf, float yf) {
 	player.setPosition(Position);
 }
 
+bool Player::CheckPlayerCollisionWithObject(sf::Rect<float> s) {
+        sf::Rect<float> Bounds = Player::GetBounds()
+
+	// check
+	return false
+}
+
 void Player::Jump() {
 	/*sf::Rect<float> PlayerBounds = Player::GetBounds();
 	sf::Rect<float> GroundBounds = Ground::GetBounds();*/
 }
 
 void RenderPlayer(sf::RenderWindow& w) { 
-
 	player.setScale(Factors);
 	w.draw(player); 
 }
