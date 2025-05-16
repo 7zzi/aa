@@ -3,41 +3,68 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-#include <unordered_map>
 
-const sf::Texture texture("Player.png");
-sf::Sprite player(texture);
-sf::Vector2f Factors(2.0f, 2.0f);
-float x = 320.0f;
-float y = 40.0f;
+player::player():
+	texture("Player.png"),
+	sprite(texture)
+{
+	texture.loadFromFile("player.png");
+	sprite.setTexture(texture);
 
-sf::FloatRect Player::GetBounds() {
-	sf::FloatRect localBounds = player.getGlobalBounds();
-	return localBounds;
+	m_Position.x = 320;
+	m_Position.y = 380;
+
+	m_Speed = 400;
+
+	sf::FloatRect bounds = sprite.getGlobalBounds();
 }
 
-void Player::Move(float xf, float yf) {
-	Player::x += xf;
-	Player::y += yf;
-
-	sf::Vector2f Position(x, y);
-
-	player.setPosition(Position);
+sf::Sprite player::getSprite() {
+	return sprite;
 }
 
-bool Player::CheckPlayerCollisionWithObject(sf::Rect<float> s) {
-        sf::Rect<float> Bounds = Player::GetBounds()
-
-	// check
-	return false
+void player::moveLeft() {
+	m_LeftPressed = true;
 }
 
-void Player::Jump() {
-	/*sf::Rect<float> PlayerBounds = Player::GetBounds();
-	sf::Rect<float> GroundBounds = Ground::GetBounds();*/
+void player::moveRight() {
+	m_RightPressed = true;
 }
 
-void RenderPlayer(sf::RenderWindow& w) { 
-	player.setScale(Factors);
-	w.draw(player); 
+void player::stopLeft() {
+	m_LeftPressed = false;
+}
+
+void player::stopRight() {
+	m_RightPressed = false;
+}
+
+void player::jump() {
+	velocityY -= 15;
+} 
+
+void player::update(float elapsedTime) {
+	if (m_Position.y < 380.0f)                  //If you are above ground
+		velocityY += gravity;    //Add gravity
+	//That's not supposed to happen, put him back up
+
+	velocityX += accelerationX;
+	velocityY += accelerationY;
+
+	m_Position.x += velocityX;
+	m_Position.y += velocityY;
+
+	if (m_Position.y > 379.0f)             //If you are below ground
+		m_Position.y = 380.0f;
+	/*if (player::check(g_Bounds)) { std::cout << "1" << std::endl; }
+	if (!player::check(g_Bounds)) { m_Position.y += 5; }*/
+
+	if (m_RightPressed) {
+		m_Position.x += m_Speed * elapsedTime;
+	}
+
+	if (m_LeftPressed) {
+		m_Position.x -= m_Speed * elapsedTime;
+	}
+	sprite.setPosition(m_Position);
 }

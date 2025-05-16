@@ -1,23 +1,35 @@
 #pragma once
 
-#ifndef PLAYER_H
 #define PLAYER_H
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-//sf::Sprite LOAD();
-class Player {
-	private:
-		sf::Sprite player;
-		void Kill(int REASON);
-		float x;
-		float y;
-	public:
-		sf::FloatRect GetBounds();
-		void Move();
-		void Jump();
-		void Render();
-};
+class player {
+	private:		
+		sf::Texture texture;
 
-#endif
+		bool m_LeftPressed;
+		bool m_RightPressed;
+
+		float m_Speed;
+		
+		sf::FloatRect bounds;
+
+		float velocityX = 0;
+		float velocityY = 0;
+		float accelerationX = 0;
+		float accelerationY = 0;
+
+		float gravity = 2;
+	public:
+		player();
+		sf::Sprite sprite;
+		sf::Vector2f m_Position;
+		void moveLeft();
+		void moveRight();
+		void stopLeft();
+		void stopRight();
+		void jump();
+		void update(float elapsedTime);
+};

@@ -2,22 +2,14 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
-
-const sf::Texture texture("Block.png");
-sf::Sprite ground(texture);
-
-sf::Vector2f ScaleFactors(1.0f, 1.0f);
-std::vector<sf::Vector2f> positions;
-
-sf::FloatRect Ground::GetBounds() {
-	sf::FloatRect localBounds = ground.getGlobalBounds();
-	return localBounds;
+ground::ground():
+	texture("Block.png"),
+	sprite(texture)
+{
+	sf::FloatRect bounds = sprite.getGlobalBounds();
 }
+void ground::draw(sf::RenderWindow& w) {
 
-void Jump() {}
-
-void Ground::Render(sf::RenderWindow& w) {
-	ground.setScale(ScaleFactors);
 	positions.push_back({0, 400 });
 
 	// Repeat
@@ -29,7 +21,20 @@ void Ground::Render(sf::RenderWindow& w) {
 	}
 
 	for (const auto& position : positions) {
-		ground.setPosition(position); // Set the sprite's position
-		w.draw(ground); // Draw the sprite at the current position
+		sprite.setPosition(position); // Set the sprite's position
+		w.draw(sprite); // Draw the sprite at the current position
 	}
+}
+/*void hit() {
+	velocityY -= 10;
+}*/
+void ground::update() {
+	/*sprite.setPosition(g_Position.x, g_Position.y);
+
+	if (g_Position.y < 400)                  //If you are above ground
+		velocityY += gravity;    //Add gravity
+	else if (g_Position.y > 400)             //If you are below ground
+		g_Position.y = 400;                 //That's not supposed to happen, put him back up
+	velocityY += accelerationY;
+	g_Position.y += velocityY;*/
 }
