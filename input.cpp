@@ -1,30 +1,40 @@
-#include "Engine.h"
+#include "engine.h"
+#include <iostream>
+void engine::input() {
+	SDL_Event event;
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_EVENT_QUIT) {
+			// while ( q == 0 )
+			//     everything();
 
-void Engine::input() {
-	if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) {
-		m_Window.close();
-	}
+			q = 1;
+		}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::A)) {
-		Player.moveLeft();
-	}
-	else {
-		Player.stopLeft();
-	}
+		if (event.type == SDL_EVENT_KEY_DOWN)
+		{
+			// void move(float x, float y);
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::W) && isJumpCooldownOver()) {
-			Player.jump();
-	}
+			// W
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::D)) {
-		Player.moveRight();
-	}
-	else {
-		Player.stopRight();
-	}
+			float a = 5.0f;
+			if (event.key.scancode == SDL_SCANCODE_W) {
+				player.move(NULL, -a);
+			} 
 
-	/*if (Keyboard::isKeyPressed(Keyboard::Key::O)) {
-		ground.hit();
-	}*/
+			// S
+			if (event.key.scancode == SDL_SCANCODE_S) {
+				player.move(NULL, a);
+			} 
 
+			// A
+			if (event.key.scancode == SDL_SCANCODE_A) {
+				player.move(-a, NULL);
+			} 
+
+			// D
+			if (event.key.scancode == SDL_SCANCODE_D) {
+				player.move(a, NULL);
+			}
+		}
+	}
 }

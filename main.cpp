@@ -1,9 +1,7 @@
 #include "engine.h"
 
 int main() {
-	Engine engina;
+	engine e;
 
-	engina.start();
-
-	return 0;
+	e.s();
 }
