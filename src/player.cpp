@@ -46,5 +46,5 @@ player::player() {
 		 //rect.y = 240;
 	 }
 
-	 std::cout << rect.x << " " << rect.y << std::endl;
+	 // std::cout << rect.x << " " << rect.y << std::endl;
  }
