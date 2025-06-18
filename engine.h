@@ -1,26 +1,31 @@
 #pragma once
-#include <SFML/Graphics.hpp>
+
+#define ENGINE_H
+#include <SDL3/SDL.h>
 #include "player.h"
-#include "ground.h"
-using namespace sf;
-
-class Engine
+#include "loader.h"
+class engine
 {
-private:
-	player Player;
-	ground Ground;
-	Clock jumpclock;
+	private:
+		player player;
+		loader loader;
+		SDL_Texture* pT;
 
-	RenderWindow m_Window;
+		SDL_Window* w;
+		SDL_Renderer* r;
+		SDL_Event e;
 
-	void update(float dtAsSeconds);
+		bool quit = false;
 
-	void input();
-	void draw(player Player);
+		void update(float dtAsSeconds);
 
-	float jumpCountdownAsSeconds = 1.5f;
-public:
-	Engine();
-	int start();
-	bool isJumpCooldownOver();
+		void input();
+		void draw();
+		void update();
+		int q = 0;
+
+		bool hasIntersectionFloat(const SDL_FRect* a, const SDL_FRect* b);
+	public:
+		engine();
+		int s();
 };

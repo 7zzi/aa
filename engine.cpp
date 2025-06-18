@@ -1,39 +1,27 @@
-#include "Engine.h"
+#include <SDL3/SDL.h>
+#include <iostream>
+#include "engine.h"
+#include "player.h"
+#include "loader.h"
+engine::engine() {
+	if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_EVENTS) < 0) {
+		std::cerr << "SDL failed to initialize! SDL_ERROR: " << SDL_GetError() << "\n";
+	}
+	w = SDL_CreateWindow("xxx", 640, 480, SDL_WINDOW_RESIZABLE);
+	r = SDL_CreateRenderer(w, nullptr);
+	loader.load(r, -1);
+	pT = player.load(r);
+}
 
-using namespace sf;
-Engine::Engine()
-{
-	Clock jumpclock;
-
-	Vector2f resolution;
-	m_Window.create(VideoMode({ 640, 480 }), "xxx", State::Windowed);
-};
-
-int Engine::start()
-{
-	while (m_Window.isOpen())
-	{
-		jumpCountdownAsSeconds -= jumpclock.getElapsedTime().asSeconds();
-
-		Time dt = jumpclock.restart();
-		
-		float dtAsSeconds = dt.asSeconds();
-
+int engine::s() {
+	while (q == 0) {
 		input();
-		update(dtAsSeconds);
+		update();
 		draw();
 	}
 
-	return 0;
-}
+	SDL_DestroyRenderer(r);
+	SDL_DestroyWindow(w);
 
-bool Engine::isJumpCooldownOver() {
-	if (jumpCountdownAsSeconds <= 0.0f) {
-		jumpCountdownAsSeconds = 1.5f;
-		jumpclock.restart();
-		return true;
-	}
-	else {
-		return false;
-	}
+	return 0;
 }

@@ -1,70 +1,50 @@
 #include "player.h"
-#include "ground.h"
-
-#include <SFML/Graphics.hpp>
+#include <SDL3/SDL.h>
 #include <iostream>
 
-player::player():
-	texture("Player.png"),
-	sprite(texture)
-{
-	texture.loadFromFile("player.png");
-	sprite.setTexture(texture);
-
-	m_Position.x = 320;
-	m_Position.y = 380;
-
-	m_Speed = 400;
-
-	sf::FloatRect bounds = sprite.getGlobalBounds();
+player::player() {
 }
 
-sf::Sprite player::getSprite() {
-	return sprite;
-}
+ SDL_Texture* player::load(SDL_Renderer* ren) {
+	SDL_Surface* bmp = SDL_LoadBMP("player");
+    if (!bmp) {
+        std::cerr << "Failed to load BMP file: blocks.bmp\n";
+        return;
+    }
+	 SDL_Texture* pTex = SDL_CreateTextureFromSurface(ren, bmp);
+	 if (!pTex) { std::cout << "failed to create texture! sdl_error: " << SDL_GetError() << std::endl; }
+	 SDL_DestroySurface(bmp);
+	 return pTex;
+ }
 
-void player::moveLeft() {
-	m_LeftPressed = true;
-}
+ void player::move(float x, float y) {
+	 rect.x += x;
+	 rect.y += y;
+ }
 
-void player::moveRight() {
-	m_RightPressed = true;
-}
+ void player::setsize(float w, float h) {
+	 rect.w = w;
+	 rect.h = h;
+ }
 
-void player::stopLeft() {
-	m_LeftPressed = false;
-}
+ void player::setpos(float x, float y) {
+	 rect.x = x;
+	 rect.y = y;
+ }
 
-void player::stopRight() {
-	m_RightPressed = false;
-}
+ void player::update(int COLLISION_OUTPUT) {
+	 if (COLLISION_OUTPUT == 0) {
+		 //velocityY += 2;
+	 }
 
-void player::jump() {
-	velocityY -= 15;
-} 
+	 /*velocityX += accelerationX;
+	 velocityY += accelerationY;
+	 rect.x += velocityX;
+	 rect.y += velocityY;
+	 */
+	 if (rect.y >= 240) {
+		 //rect.y = 240;
+	 }
 
-void player::update(float elapsedTime) {
-	if (m_Position.y < 380.0f)                  //If you are above ground
-		velocityY += gravity;    //Add gravity
-	//That's not supposed to happen, put him back up
-
-	velocityX += accelerationX;
-	velocityY += accelerationY;
-
-	m_Position.x += velocityX;
-	m_Position.y += velocityY;
-
-	if (m_Position.y > 379.0f)             //If you are below ground
-		m_Position.y = 380.0f;
-	/*if (player::check(g_Bounds)) { std::cout << "1" << std::endl; }
-	if (!player::check(g_Bounds)) { m_Position.y += 5; }*/
-
-	if (m_RightPressed) {
-		m_Position.x += m_Speed * elapsedTime;
-	}
-
-	if (m_LeftPressed) {
-		m_Position.x -= m_Speed * elapsedTime;
-	}
-	sprite.setPosition(m_Position);
-}
+	 std::cout << rect.x << " " << rect.y << std::endl;
+ }
