@@ -1,1 +1,0 @@
-/usr/bin/c++ -Wl,--dependency-file=CMakeFiles/meow.dir/link.d CMakeFiles/meow.dir/main.cpp.o -o meow  -Wl,-rpath,/usr/local/lib /usr/local/lib/libSDL3.so.0.3.0

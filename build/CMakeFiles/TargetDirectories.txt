@@ -1,3 +1,0 @@
-/home/ava/docs/aa/build/CMakeFiles/meow.dir
-/home/ava/docs/aa/build/CMakeFiles/edit_cache.dir
-/home/ava/docs/aa/build/CMakeFiles/rebuild_cache.dir
