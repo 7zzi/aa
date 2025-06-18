@@ -3,3 +3,4 @@ build/*
 vendored
 build
 CMakeLists.txt
+.vscode

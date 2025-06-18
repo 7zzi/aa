@@ -9,8 +9,8 @@ engine::engine() {
 	}
 	w = SDL_CreateWindow("xxx", 640, 480, SDL_WINDOW_RESIZABLE);
 	r = SDL_CreateRenderer(w, nullptr);
-	loader.load(r, -1);
-	pT = player.load(r);
+	loaderInstance.load(r, -1);
+	pT = playerInstance.load(r);
 }
 
 int engine::s() {

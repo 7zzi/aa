@@ -7,8 +7,8 @@
 class engine
 {
 	private:
-		player player;
-		loader loader;
+		player playerInstance;
+		loader loaderInstance;
 		SDL_Texture* pT;
 
 		SDL_Window* w;

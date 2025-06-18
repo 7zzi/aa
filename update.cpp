@@ -9,13 +9,13 @@ bool engine::hasIntersectionFloat(const SDL_FRect* a, const SDL_FRect* b) {
 }
 
 void engine::update() {
-	for (const SDL_FRect& wall : loader.collisionRects) {
-		if (hasIntersectionFloat(&player.rect, &wall)) {
+	for (const SDL_FRect& wall : loaderInstance.collisionRects) {
+		if (hasIntersectionFloat(&playerInstance.rect, &wall)) {
 			std::cout << "1" << std::endl;
-			player.update(1);
+			playerInstance.update(1);
 		}
 		else { 
-			player.update(0);
+			playerInstance.update(0);
 			std::cout << "FALSE" << std::endl;
 		}
 	}

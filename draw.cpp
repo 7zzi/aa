@@ -6,8 +6,8 @@ void engine::draw() {
     SDL_SetRenderTarget(r, NULL);
     SDL_SetRenderDrawColor(r, 255, 255, 255, 255);
     SDL_RenderClear(r); // Clear the screen (window)
-    loader.render(r);
-    SDL_RenderTexture(r, pT, NULL, &player.rect);
+    loaderInstance.render(r);
+    SDL_RenderTexture(r, pT, NULL, &playerInstance.rect);
 
 
     SDL_RenderPresent(r);

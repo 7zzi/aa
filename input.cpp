@@ -18,22 +18,22 @@ void engine::input() {
 
 			float a = 5.0f;
 			if (event.key.scancode == SDL_SCANCODE_W) {
-				player.move(NULL, -a);
+				playerInstance.move(NULL, -a);
 			} 
 
 			// S
 			if (event.key.scancode == SDL_SCANCODE_S) {
-				player.move(NULL, a);
+				playerInstance.move(NULL, a);
 			} 
 
 			// A
 			if (event.key.scancode == SDL_SCANCODE_A) {
-				player.move(-a, NULL);
+				playerInstance.move(-a, NULL);
 			} 
 
 			// D
 			if (event.key.scancode == SDL_SCANCODE_D) {
-				player.move(a, NULL);
+				playerInstance.move(a, NULL);
 			}
 		}
 	}

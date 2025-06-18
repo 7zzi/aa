@@ -9,7 +9,7 @@ player::player() {
 	SDL_Surface* bmp = SDL_LoadBMP("player");
     if (!bmp) {
         std::cerr << "Failed to load BMP file: blocks.bmp\n";
-        return;
+        return nullptr;
     }
 	 SDL_Texture* pTex = SDL_CreateTextureFromSurface(ren, bmp);
 	 if (!pTex) { std::cout << "failed to create texture! sdl_error: " << SDL_GetError() << std::endl; }
